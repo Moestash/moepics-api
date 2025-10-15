@@ -1,12 +1,13 @@
 {
   "name": "moepics-api",
   "version": "0.0.1",
-  "description": "Private wrapper for moepictures api",
+  "description": "Private wrapper for the moepictures api",
   "main": "dist/moepictures.js",
   "types": "dist/moepicturesils.d.ts",
   "scripts": {
     "start": "tsc && node dist/start.js",
     "build": "tsc",
+    "prepare": "npm run build",
     "clean": "del-cli ./dist"
   },
   "keywords": [
