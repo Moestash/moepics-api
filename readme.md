@@ -1,10 +1,10 @@
 <div align="left">
   <p>
-    <img src="https://i.imgur.com/DGvZWgB.png" width="700"/>
+    <img src="https://i.imgur.com/DGvZWgB.png" width="600"/>
   </p>
 </div>
 
-This is a private API wrapper around the https://moepictures.net/ api intended for personal use. 
+This is a private API wrapper around the https://moepictures.net api intended for personal use. 
 You will need a valid api key in order to use this, which is not currently available to the public.
 
 ©2025 Moepictures
