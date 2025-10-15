@@ -1,7 +1,7 @@
 {
   "name": "moepics-api",
   "version": "0.0.1",
-  "description": "Wrapper for moepictures api",
+  "description": "Private wrapper for moepictures api",
   "main": "dist/moepictures.js",
   "types": "dist/moepicturesils.d.ts",
   "scripts": {
