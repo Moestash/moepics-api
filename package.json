@@ -1,0 +1,28 @@
+{
+  "name": "moepics-api",
+  "version": "0.0.1",
+  "description": "Wrapper for moepictures api",
+  "main": "dist/moepictures.js",
+  "types": "dist/moepicturesils.d.ts",
+  "scripts": {
+    "start": "tsc && node dist/start.js",
+    "build": "tsc",
+    "clean": "del-cli ./dist"
+  },
+  "keywords": [
+    "anime",
+    "booru",
+    "moe",
+    "api"
+  ],
+  "author": "Moebytes",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "del-cli": "^7.0.0",
+    "deviantart.ts": "^0.3.0",
+    "dotenv": "^17.2.3",
+    "pixiv.ts": "^0.7.9",
+    "typescript": "^5.9.3"
+  }
+}
