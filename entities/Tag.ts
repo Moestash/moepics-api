@@ -20,11 +20,6 @@ export class TagRoutes {
         return response as string[]
     }
 
-    public unverified = async (tag: string) => {
-        const response = await this.api.get("/api/tag/unverified", {tag})
-        return response as Tag | undefined
-    }
-
     public counts = async (tags: string[]) => {
         const response = await this.api.get("/api/tag/counts", {tags})
         return response as TagCount[]

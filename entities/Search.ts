@@ -50,16 +50,6 @@ export class SearchRoutes {
         return response as GroupSearch[]
     }
 
-    public suggestions = async (params: SearchSuggestionsParams) => {
-        const response = await this.api.get("/api/search/suggestions", params)
-        return response as TagCount[]
-    }
-
-    public sidebarTags = async (params: SidebarTagParams) => {
-        const response = await this.api.get("/api/search/sidebartags", params)
-        return response as TagCount[]
-    }
-
     public threads = async (params: CommentSearchParams) => {
         const response = await this.api.get("/api/search/threads", params)
         return response as ThreadSearch[]
