@@ -3,8 +3,7 @@ import type {PostSearchParams, PostSearch,
 CategorySearchParams, TagCategorySearch,
 TagSearchParams, TagSearch, CommentSearchParams,
 CommentSearch, NoteSearch, GroupSearchParams,
-GroupSearch, SearchSuggestionsParams, TagCount,
-SidebarTagParams, ThreadSearch, MessageSearchParams,
+GroupSearch, ThreadSearch, MessageSearchParams,
 MessageSearch, Report, SimilarSearchParams, Post} from "../types/Types"
 
 export class SearchRoutes {

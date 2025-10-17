@@ -165,6 +165,11 @@ export class UserRoutes {
         return response as string
     }
 
+    public undeleteAccount = async () => {
+        const response = await this.api.put("/api/user/undelete", undefined)
+        return response as string
+    }
+
     public deleteHistory = async (params?: {postID?: string; all?: boolean}) => {
         const response = await this.api.delete("/api/user/history/delete", params ?? {})
         return response as string

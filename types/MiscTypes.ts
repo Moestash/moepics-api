@@ -179,3 +179,42 @@ export interface SplatterOptions {
     clientWidth?: number
     clientHeight?: number
 }
+
+export type MiscGetEndpoint<T extends string> = 
+    T extends "/api/misc/captcha/create" ? {params: {color: string}, response: {captcha: string}} :
+    T extends "/api/misc/redirect" ? {params: {url: string}, response: string} :
+    T extends "/api/misc/emojis" ? {params: null, response: {[key: string]: string}} :
+    T extends "/api/misc/banner" ? {params: null, response: Banner | undefined} :
+    T extends "/api/misc/api-key/status" ? {params: null, response: boolean} :
+    never
+
+export type MiscPostEndpoint<T extends string> = 
+    T extends "/api/misc/captcha" ? {params: {captchaResponse: string}, response: null} :
+    T extends "/api/misc/saucenao" ? {params: number[], response: SaucenaoResponse[]} :
+    T extends "/api/misc/boorulinks" ? {params: {bytes: number[], pixivID: string}, response: string[]} :
+    T extends "/api/misc/revdanbooru" ? {params: number[], response: string} :
+    T extends "/api/misc/proxy" ? {params: {url: string}, response: {data: number[]}[]} :
+    T extends "/api/misc/translate" ? {params: string[], response: string[]} :
+    T extends "/api/misc/romajinize" ? {params: string[], response: string[]} :
+    T extends "/api/misc/contact" ? {params: ContactParams, response: string} :
+    T extends "/api/misc/copyright" ? {params: CopyrightParams, response: string} :
+    T extends "/api/misc/wdtagger" ? {params: number[], response: WDTaggerResponse} :
+    T extends "/api/misc/ocr" ? {params: number[], response: OCRResponse[]} :
+    T extends "/api/premium/paymentlink" ? {params: null, response: {hosted_url: string}} :
+    T extends "/api/premium/payment" ? {params: {event: CoinbaseEvent}, response: string} :
+    T extends "/api/misc/setbanner" ? {params: {text: string, link: string}, response: string} :
+    T extends "/api/misc/litterbox" ? {params: number[], response: string} :
+    T extends "/api/client-key" ? {params: {publicKey: string}, response: string} :
+    T extends "/api/server-key" ? {params: null, response: {publicKey: string}} :
+    T extends "/api/misc/blacklistip" ? {params: {ip: string, reason: string}, response: string} :
+    T extends "/api/misc/imghash" ? {params: number[], response: string} :
+    T extends "/api/misc/api-key" ? {params: null, response: string} :
+    T extends "/api/misc/sourcelookup" ? {params: SourceLookupParams, response: SourceLookup} :
+    T extends "/api/misc/taglookup" ? {params: TagLookupParams, response: TagLookup} :
+    T extends "/storage" ? {params: {link: string, songCover?: boolean}, response: string} :
+    never
+
+export type MiscDeleteEndpoint<T extends string> = 
+    T extends "/api/misc/unblacklistip" ? {params: {ip: string}, response: string} :
+    T extends "/api/misc/api-key/delete" ? {params: null, response: string} :
+    never

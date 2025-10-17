@@ -217,3 +217,52 @@ export interface ThumbnailUpdate {
     thumbnail: string
     thumbnailExt: string
 }
+
+export type PostGetEndpoint<T extends string> = 
+    T extends "/api/post" ? {params: {postID: string}, response: PostFull | undefined} :
+    T extends "/api/posts" ? {params: {postIDs: string[]}, response: PostFull[]} :
+    T extends "/api/post/tags" ? {params: {postID: string}, response: MiniTag[]} :
+    T extends "/api/post/comments" ? {params: {postID: string}, response: UserComment[]} :
+    T extends "/api/post/children" ? {params: {postID: string}, response: ChildPost[]} :
+    T extends "/api/post/parent" ? {params: {postID: string}, response: ChildPost | undefined} :
+    T extends "/api/post/unverified" ? {params: {postID: string}, response: UnverifiedPost | undefined} :
+    T extends "/api/post/list/unverified" ? {params: {offset?: number} | null, response: UnverifiedPost[]} :
+    T extends "/api/post/deleted" ? {params: {query?: string, offset?: number} | null, response: DeletedPost[]} :
+    T extends "/api/post/deleted/unverified" ? {params: {offset?: number} | null, response: UnverifiedPost[]} :
+    T extends "/api/post-edits/list/unverified" ? {params: {offset?: number} | null, response: UnverifiedPost[]} :
+    T extends "/api/post/children/unverified" ? {params: {postID: string}, response: ChildPost[]} :
+    T extends "/api/post/parent/unverified" ? {params: {postID: string}, response: ChildPost | undefined} :
+    T extends "/api/post/delete/request/list" ? {params: {offset?: number} | null, response: PostDeleteRequest[]} :
+    T extends "/api/post/history" ? {params: PostHistoryParams | null, response: PostHistory[]} :
+    T extends "/api/post/pending" ? {params: null, response: UnverifiedPost[]} :
+    T extends "/api/post/rejected" ? {params: null, response: UnverifiedPost[]} :
+    T extends "/api/post/redirects" ? {params: {postID: string}, response: Redirect[]} :
+    never
+
+export type PostPostEndpoint<T extends string> = 
+    T extends "/api/post/takedown" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/lock" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/private" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/delete/request" ? {params: {postID: string, reason: string}, response: string} :
+    T extends "/api/post/delete/request/fulfill" ? {params: PostDeleteRequestFulfillParams, response: string} :
+    T extends "/api/post/view" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/compress" ? {params: PostCompressParams, response: string} :
+    T extends "/api/post/upscale" ? {params: PostUpscaleParams, response: string} :
+    T extends "/api/post/appeal" ? {params: {postID: string, reason: string}, response: string} :
+    T extends "/api/post/metadata" ? {params: {postID: string, order: number}, response: PostMetadata} :
+    never
+
+export type PostPutEndpoint<T extends string> = 
+    T extends "/api/post/quickedit" ? {params: PostQuickEditParams, response: string} :
+    T extends "/api/post/quickedit/unverified" ? {params: PostQuickEditUnverifiedParams, response: string} :
+    T extends "/api/post/undelete" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/undelete/unverified" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/thumbnail" ? {params: {postID: string, thumbnails: ThumbnailUpdate[], unverified?: boolean}, response: string} :
+    never
+
+export type PostDeleteEndpoint<T extends string> = 
+    T extends "/api/post/delete" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/delete/unverified" ? {params: {postID: string}, response: string} :
+    T extends "/api/post/history/delete" ? {params: {postID: string, historyID: string}, response: string} :
+    T extends "/api/post/emptybin" ? {params: null, response: string} :
+    never
