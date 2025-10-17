@@ -25,10 +25,16 @@ export interface TagCategories {
 
 export interface TagCount {
     tag: string
+    count: string
     type: TagType
     image: string | null
     imageHash: string | null
-    count: string
+    description: string
+    website: string | null
+    social: string | null
+    twitter: string | null
+    fandom: string | null
+    wikipedia: string | null
     hidden: boolean | null
     r18: boolean | null
 }
