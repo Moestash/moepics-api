@@ -119,26 +119,3 @@ export interface NoteHistoryDeleteParams {
     order: number
     historyID: string
 }
-
-export type NoteGetEndpoint<T extends string> = 
-    T extends "/api/notes" ? {params: {postID: string}, response: Note[]} :
-    T extends "/api/notes/unverified" ? {params: {postID: string}, response: UnverifiedNote[]} :
-    T extends "/api/note/list/unverified" ? {params: {offset?: number} | null, response: UnverifiedNoteSearch[]} :
-    T extends "/api/note/history" ? {params: NoteHistoryParams | null, response: NoteHistory[]} :
-    never
-
-export type NotePostEndpoint<T extends string> = 
-    T extends "/api/note/save" ? {params: NoteSaveParams, response: string} :
-    T extends "/api/note/save/request" ? {params: NoteSaveParams, response: string} :
-    T extends "/api/note/approve" ? {params: NoteApproveParams, response: string} :
-    T extends "/api/note/reject" ? {params: NoteApproveParams, response: string} :
-    never
-
-export type NotePutEndpoint<T extends string> = 
-    T extends "/api/note/save" ? {params: NoteEditParams, response: string} :
-    T extends "/api/note/save/unverified" ? {params: NoteSaveParams, response: string} :
-    never
-
-export type NoteDeleteEndpoint<T extends string> = 
-    T extends "/api/note/history/delete" ? {params: NoteHistoryDeleteParams, response: string} :
-    never

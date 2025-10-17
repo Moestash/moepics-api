@@ -33,14 +33,3 @@ export interface APIKey {
     createDate: string
     key: string
 }
-
-export type TokenPostEndpoint<T extends string> = 
-    T extends "/api/2fa/create" ? {params: null, response: string} :
-    T extends "/api/2fa/qr" ? {params: null, response: string} :
-    T extends "/api/2fa/enable" ? {params: {token: string}, response: string} :
-    T extends "/api/2fa" ? {params: {token: string}, response: string} :
-    never
-
-export type TokenDeleteEndpoint<T extends string> = 
-    T extends "/api/2fa/delete" ? {params: null, response: string} :
-    never

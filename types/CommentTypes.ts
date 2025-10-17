@@ -28,21 +28,3 @@ export interface CommentReportFulfillParams {
     id: string 
     accepted: boolean
 }
-
-export type CommentGetEndpoint<T extends string> = 
-    T extends "/api/comment" ? {params: {commentID: string}, response: UserComment | undefined} :
-    never
-
-export type CommentPostEndpoint<T extends string> = 
-    T extends "/api/comment/create" ? {params: {comment: string, postID: string}, response: string} :
-    T extends "/api/comment/report" ? {params: {commentID: string, reason: string}, response: string} :
-    T extends "/api/comment/report/fulfill" ? {params: CommentReportFulfillParams, response: string} :
-    never
-
-export type CommentPutEndpoint<T extends string> = 
-    T extends "/api/comment/edit" ? {params: {comment: string, commentID: string}, response: string} :
-    never
-
-export type CommentDeleteEndpoint<T extends string> = 
-    T extends "/api/comment/delete" ? {params: {commentID: string}, response: string} :
-    never

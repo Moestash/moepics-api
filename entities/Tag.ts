@@ -1,5 +1,5 @@
 import {API} from "../api"
-import type {Tag, TagCount,
+import type {Tag, TagCount, Alias,
 TagDeleteRequest, AliasRequest,
 TagEditRequest, TagHistory, TagHistoryParams,
 AliasHistorySearch, AliasToParams,
@@ -30,9 +30,9 @@ export class TagRoutes {
         return response as Tag[]
     }
 
-    public map = async (tags: string[]) => {
-        const response = await this.api.get("/api/tag/map", {tags})
-        return response as { [key: string]: Tag }
+    public aliases = async (aliases: string[]) => {
+        const response = await this.api.get("/api/tag/aliases", {aliases})
+        return response as Alias[]
     }
 
     public listUnverified = async (tags: string[]) => {

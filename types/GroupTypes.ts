@@ -132,36 +132,3 @@ export interface GroupHistoryParams {
     query?: string
     offset?: number
 }
-
-export type GroupGetEndpoint<T extends string> = 
-    T extends "/api/group" ? {params: {name: string}, response: GroupPosts | undefined} :
-    T extends "/api/groups" ? {params: {postID: string}, response: GroupPosts[]} :
-    T extends "/api/groups/list" ? {params: {groups: string[]}, response: Group[]} :
-    T extends "/api/group/request/list" ? {params: {offset?: number} | null, response: GroupRequest[]} :
-    T extends "/api/group/delete/request/list" ? {params: {offset?: number} | null, response: GroupDeleteRequest[]} :
-    T extends "/api/group/edit/request/list" ? {params: {offset?: number} | null, response: GroupEditRequest[]} :
-    T extends "/api/group/history" ? {params: GroupHistoryParams | null, response: GroupHistory[]} :
-    never
-
-export type GroupPostEndpoint<T extends string> = 
-    T extends "/api/group" ? {params: GroupParams, response: string} :
-    T extends "/api/group/request" ? {params: GroupRequestParams, response: string} :
-    T extends "/api/group/request/fulfill" ? {params: GroupRequestFulfillParams, response: string} :
-    T extends "/api/group/delete/request" ? {params: GroupDeleteRequestParams, response: string} :
-    T extends "/api/group/post/delete/request" ? {params: GroupPostDeleteRequestParams, response: string} :
-    T extends "/api/group/delete/request/fulfill" ? {params: GroupDeleteRequestFulfillParams, response: string} :
-    T extends "/api/group/post/delete/request/fulfill" ? {params: GroupPostDeleteRequestFulfillParams, response: string} :
-    T extends "/api/group/edit/request" ? {params: GroupEditRequestParams, response: string} :
-    T extends "/api/group/edit/request/fulfill" ? {params: GroupEditRequestFulfillParams, response: string} :
-    never
-
-export type GroupPutEndpoint<T extends string> = 
-    T extends "/api/group/edit" ? {params: GroupEditParams, response: string} :
-    T extends "/api/group/reorder" ? {params: GroupReorderParams, response: string} :
-    never
-
-export type GroupDeleteEndpoint<T extends string> = 
-    T extends "/api/group/delete" ? {params: {slug: string}, response: string} :
-    T extends "/api/group/post/delete" ? {params: GroupPostDeleteParams, response: string} :
-    T extends "/api/group/history/delete" ? {params: {slug: string, historyID: string}, response: string} :
-    never
