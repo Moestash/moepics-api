@@ -3,8 +3,8 @@ import type {PostFull, MiniTag, UserComment,
 ChildPost, UnverifiedPost, DeletedPost,
 PostDeleteRequest, PostHistory, PostHistoryParams,
 Redirect, PostDeleteRequestFulfillParams,
-PostCompressParams, PostUpscaleParams,
-PostMetadata, PostQuickEditParams,
+PostCompressParams, PostUpscaleParams, ImageUpdateColumns,
+PostMetadata, PostQuickEditParams, PostUpdateColumns,
 PostQuickEditUnverifiedParams, ThumbnailUpdate} from "../types/Types"
 
 export class PostRoutes {
@@ -177,6 +177,11 @@ export class PostRoutes {
 
     public emptyBin = async () => {
         const response = await this.api.delete("/api/post/emptybin", undefined)
+        return response as string
+    }
+
+    public update = async (postID: string, column: PostUpdateColumns, value: any) => {
+        const response = await this.api.put("/api/post/update", {postID, column, value})
         return response as string
     }
 }

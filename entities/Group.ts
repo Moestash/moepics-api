@@ -6,7 +6,7 @@ GroupRequestFulfillParams, GroupDeleteRequestParams,
 GroupPostDeleteRequestParams, GroupDeleteRequestFulfillParams,
 GroupPostDeleteRequestFulfillParams, GroupEditRequestParams,
 GroupEditRequestFulfillParams, GroupEditParams, GroupReorderParams,
-GroupPostDeleteParams} from "../types/Types"
+GroupPostDeleteParams, GroupUpdateColumns} from "../types/Types"
 
 export class GroupRoutes {
     public constructor(private readonly api: API) {}
@@ -113,6 +113,11 @@ export class GroupRoutes {
 
     public deleteHistory = async (slug: string, historyID: string) => {
         const response = await this.api.delete("/api/group/history/delete", {slug, historyID})
+        return response as string
+    }
+
+    public update = async (slug: string, column: GroupUpdateColumns, value: any) => {
+        const response = await this.api.put("/api/group/update", {slug, column, value})
         return response as string
     }
 }

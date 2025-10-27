@@ -121,6 +121,7 @@ export interface SourceLookup {
     rating: PostRating
     artists: UploadTag[]
     danbooruLink: string
+    sourceLinks: {link: string, hash: string}[]
     artistIcon: string
     source: {
         title: string
@@ -193,7 +194,7 @@ export type MiscPostEndpoint<T extends string> =
     T extends "/api/misc/saucenao" ? {params: number[], response: SaucenaoResponse[]} :
     T extends "/api/misc/boorulinks" ? {params: {bytes: number[], pixivID: string}, response: string[]} :
     T extends "/api/misc/revdanbooru" ? {params: number[], response: string} :
-    T extends "/api/misc/proxy" ? {params: {url: string}, response: {data: number[]}[]} :
+    T extends "/api/misc/proxy-images" ? {params: {url: string}, response: {data: number[]}[]} :
     T extends "/api/misc/translate" ? {params: string[], response: string[]} :
     T extends "/api/misc/romajinize" ? {params: string[], response: string[]} :
     T extends "/api/misc/contact" ? {params: ContactParams, response: string} :

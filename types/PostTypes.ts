@@ -1,6 +1,15 @@
 import {PostType, PostRating, PostStyle, PostChanges, MiniTag, PostDeleteRequest, PostHistory,
 ImageFormat, Upscaler, SourceData, UserComment, Redirect, MiniTagGroup} from "./Types"
 
+export type PostUpdateColumns = "type" | "rating" | "style" | "parentID" | "posted" |
+"title" | "englishTitle" | "artist" | "source" | "commentary" | "englishCommentary" |
+"bookmarks" | "mirrors" | "buyLink" | "pixivTags" | "hidden" | "locked" | "private" | 
+"deleted" | "deletionDate"
+
+export type ImageUpdateColumns = "type" | "order" | "filename" | "upscaledFilename" |
+"width" | "height" | "upscaledWidth" | "upscaledHeight" | "size" | "upscaledSize" |
+"duration" | "thumbnail" | "hash" | "pixelHash" | "directLink" | "altSource"
+
 export interface PostMirrors {
     pixiv?: string
     soundcloud?: string
@@ -37,7 +46,8 @@ export interface Image {
     thumbnail: string
     hash: string
     pixelHash: string
-    source: string
+    directLink: string
+    altSource: string
 }
 
 export interface Post {
@@ -120,6 +130,7 @@ export interface UnverifiedPost extends Post {
     addedTagGroups: string[] | null
     removedTagGroups: string[] | null
     imageSources?: {[key: string]: string | null} | null
+    imageLinks?: {[key: string]: string | null} | null
     imageChanged: boolean | null
     changes: PostChanges
     reason: string | null
@@ -186,6 +197,7 @@ export interface PostQuickEditParams {
     tags?: string[]
     tagGroups?: {name: string, tags: string[]}[]
     imageSources?: {[key: string]: string | null} | null
+    imageLinks?: {[key: string]: string | null} | null
     reason?: string | null
     silent?: boolean
 }
@@ -261,7 +273,9 @@ export type PostPutEndpoint<T extends string> =
     T extends "/api/post/undelete" ? {params: {postID: string}, response: string} :
     T extends "/api/post/undelete/unverified" ? {params: {postID: string}, response: string} :
     T extends "/api/post/thumbnail" ? {params: {postID: string, thumbnails: ThumbnailUpdate[], unverified?: boolean}, response: string} :
-    T extends "/api/image/source" ? {params: {imageID: string, source: string, unverified?: boolean, reason?: string}, response: string} :
+    T extends "/api/image/source" ? {params: {imageID: string, directLink: string, altSource: string, unverified?: boolean, reason?: string}, response: string} :
+    T extends "/api/post/update" ? {params: {postID: string, column: PostUpdateColumns, value: any}, response: string} :
+    T extends "/api/image/update" ? {params: {imageID: string, column: ImageUpdateColumns, value: any}, response: string} :
     never
 
 export type PostDeleteEndpoint<T extends string> = 

@@ -3,7 +3,7 @@ import type {Note, UnverifiedNote,
 UnverifiedNoteSearch, NoteHistory,
 NoteHistoryParams, NoteSaveParams,
 NoteApproveParams, NoteEditParams,
-NoteHistoryDeleteParams} from "../types/Types"
+NoteHistoryDeleteParams, NoteUpdateColumns} from "../types/Types"
 
 export class NoteRoutes {
     public constructor(private readonly api: API) {}
@@ -60,6 +60,11 @@ export class NoteRoutes {
 
     public deleteHistory = async (params: NoteHistoryDeleteParams) => {
         const response = await this.api.delete("/api/note/history/delete", params)
+        return response as string
+    }
+
+    public update = async (noteID: string, column: NoteUpdateColumns, value: any) => {
+        const response = await this.api.put("/api/note/update", {noteID, column, value})
         return response as string
     }
 }

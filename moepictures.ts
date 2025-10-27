@@ -1,6 +1,7 @@
 import {CommentRoutes, CutenessRoutes, FavoriteRoutes, GroupRoutes,
 MessageRoutes, MiscRoutes, NoteRoutes, PostRoutes, SearchRoutes, TagRoutes,
-ThreadRoutes, TokenRoutes, UploadRoutes, UserRoutes, Links, Util} from "./entities"
+ThreadRoutes, TokenRoutes, UploadRoutes, UserRoutes, Links, Util,
+ImageRoutes} from "./entities"
 import {API} from "./api"
 
 export class Moepictures {
@@ -10,6 +11,7 @@ export class Moepictures {
     public cuteness: CutenessRoutes
     public favorites: FavoriteRoutes
     public groups: GroupRoutes
+    public images: ImageRoutes
     public messages: MessageRoutes
     public misc: MiscRoutes
     public notes: NoteRoutes
@@ -30,6 +32,7 @@ export class Moepictures {
         this.cuteness = new CutenessRoutes(this.api)
         this.favorites = new FavoriteRoutes(this.api)
         this.groups = new GroupRoutes(this.api)
+        this.images = new ImageRoutes(this.api)
         this.messages = new MessageRoutes(this.api)
         this.misc = new MiscRoutes(this.api)
         this.notes = new NoteRoutes(this.api)

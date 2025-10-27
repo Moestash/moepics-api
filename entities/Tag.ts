@@ -2,7 +2,7 @@ import {API} from "../api"
 import type {Tag, TagCount, Alias,
 TagDeleteRequest, AliasRequest,
 TagEditRequest, TagHistory, TagHistoryParams,
-AliasHistorySearch, AliasToParams,
+AliasHistorySearch, AliasToParams, TagUpdateColumns,
 TagDeleteRequestFulfillParams, AliasToRequestParams,
 AliasToRequestFulfillParams, TagEditRequestFulfillParams,
 TagEditParams, AliasHistoryType} from "../types/Types"
@@ -142,6 +142,11 @@ export class TagRoutes {
 
     public deleteAliasHistory = async (type: AliasHistoryType, historyID: string) => {
         const response = await this.api.delete("/api/alias/history/delete", {type, historyID})
+        return response as string
+    }
+
+    public update = async (tag: string, column: TagUpdateColumns, value: any) => {
+        const response = await this.api.put("/api/tag/update", {tag, column, value})
         return response as string
     }
 }
