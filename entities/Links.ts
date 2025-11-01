@@ -4,10 +4,22 @@ import {Image} from "../types/Types"
 export class Links {
     public constructor(private readonly api: API) {}
 
+    public appendURLParams = (url: string, params: {[key: string]: string | boolean | undefined}) => {
+        if (!url) return ""
+        const [baseUrl, hash] = url.split("#")
+        const obj = new URL(baseUrl)
+    
+        for (const [key, value] of Object.entries(params)) {
+            if (typeof value !== "undefined") obj.searchParams.set(key, value.toString())
+        }
+        return hash ? `${baseUrl}#${hash.split("?")[0]}?${obj.searchParams.toString()}` : obj.toString()
+    }
+
     public getImageLink = (image: Image, upscaled?: boolean) => {
         if (!image.filename && !image.upscaledFilename) return ""
         let filename = upscaled ? image.upscaledFilename || image.filename : image.filename
-        return `${this.api.baseURL}/${image.type}/${image.postID}-${image.order}-${filename}`
+        const link = `${this.api.baseURL}/${image.type}/${image.postID}-${image.order}-${filename}`
+        return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
     public getRawImageLink = (filename: string) => {
@@ -17,7 +29,8 @@ export class Links {
     public getUnverifiedImageLink = (image: Image, upscaled?: boolean) => {
         if (!image.filename && !image.upscaledFilename) return ""
         let filename = upscaled ? image.upscaledFilename || image.filename : image.filename
-        return `${this.api.baseURL}/unverified/${image.type}/${image.postID}-${image.order}-${filename}`
+        const link = `${this.api.baseURL}/unverified/${image.type}/${image.postID}-${image.order}-${filename}`
+        return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
     public getThumbnailLink = (image: Image, sizeType: string, mobile?: boolean, forceLive?: boolean) => {
@@ -35,7 +48,8 @@ export class Links {
         if (image.type === "image" || image.type === "comic") {
             return this.getImageLink(image, false)
         }
-        return `${this.api.baseURL}/thumbnail/${size}/${image.type}/${filename}`
+        const link = `${this.api.baseURL}/thumbnail/${size}/${image.type}/${filename}`
+        return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
     public getRawThumbnailLink = (filename: string, sizeType: string, mobile?: boolean) => {
@@ -64,7 +78,8 @@ export class Links {
         if (image.type === "image" || image.type === "comic") {
             return this.getUnverifiedImageLink(image, false)
         }
-        return `${this.api.baseURL}/thumbnail/${size}/unverified/${image.type}/${filename}`
+        const link = `${this.api.baseURL}/thumbnail/${size}/unverified/${image.type}/${filename}`
+        return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
     public getTagLink = (folder: string, filename: string | null) => {
