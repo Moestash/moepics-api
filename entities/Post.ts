@@ -184,4 +184,14 @@ export class PostRoutes {
         const response = await this.api.put("/api/post/update", {postID, column, value})
         return response as string
     }
+
+    public addTags = async (postID: string, tags: string[]) => {
+        const response = await this.api.put("/api/post/addtags", {postID, tags})
+        return response as string
+    }
+
+    public removeTags = async (postID: string, tags: string[]) => {
+        const response = await this.api.put("/api/post/removetags", {postID, tags})
+        return response as string
+    }
 }
