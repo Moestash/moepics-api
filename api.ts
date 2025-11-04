@@ -36,4 +36,10 @@ export class API {
         const contentType = response.headers.get("content-type")
         return contentType?.includes("application/json") ? response.json() : response.text()
     }
+
+    public fetch = async (url: string, params?: {[key: string]: any}) => {
+        let headers = {"x-api-key": this.apiKey}
+        const queryString = params ? "?" + new URLSearchParams(params).toString() : ""
+        return fetch(url + queryString, {headers})
+    }
 }
