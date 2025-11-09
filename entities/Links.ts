@@ -18,7 +18,7 @@ export class Links {
     public getImageLink = (image: Image, upscaled?: boolean) => {
         if (!image.filename && !image.upscaledFilename) return ""
         let filename = upscaled ? image.upscaledFilename || image.filename : image.filename
-        const link = `${this.api.baseURL}/${image.type}/${image.postID}-${image.order}-${filename}`
+        const link = `${this.api.baseURL}/${image.type}/${image.postID}-${image.order}-${encodeURIComponent(filename)}`
         return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
@@ -29,7 +29,7 @@ export class Links {
     public getUnverifiedImageLink = (image: Image, upscaled?: boolean) => {
         if (!image.filename && !image.upscaledFilename) return ""
         let filename = upscaled ? image.upscaledFilename || image.filename : image.filename
-        const link = `${this.api.baseURL}/unverified/${image.type}/${image.postID}-${image.order}-${filename}`
+        const link = `${this.api.baseURL}/unverified/${image.type}/${image.postID}-${image.order}-${encodeURIComponent(filename)}`
         return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
@@ -48,7 +48,7 @@ export class Links {
         if (image.type === "image" || image.type === "comic") {
             return this.getImageLink(image, false)
         }
-        const link = `${this.api.baseURL}/thumbnail/${size}/${image.type}/${filename}`
+        const link = `${this.api.baseURL}/thumbnail/${size}/${image.type}/${encodeURIComponent(filename)}`
         return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
@@ -61,7 +61,7 @@ export class Links {
         if (sizeType === "large") size = 800
         if (sizeType === "massive") size = 1000
         if (mobile) size = Math.floor(size / 2)
-        return `${this.api.baseURL}/${`thumbnail/${size}/${filename}`}`
+        return `${this.api.baseURL}/${`thumbnail/${size}/${encodeURIComponent(filename)}`}`
     }
 
     public getUnverifiedThumbnailLink = (image: Image, sizeType: string, mobile?: boolean) => {
@@ -78,7 +78,7 @@ export class Links {
         if (image.type === "image" || image.type === "comic") {
             return this.getUnverifiedImageLink(image, false)
         }
-        const link = `${this.api.baseURL}/thumbnail/${size}/unverified/${image.type}/${filename}`
+        const link = `${this.api.baseURL}/thumbnail/${size}/unverified/${image.type}/${encodeURIComponent(filename)}`
         return this.appendURLParams(link, {hash: image.pixelHash})
     }
 
@@ -89,7 +89,7 @@ export class Links {
         if (folder === "character") dest = "character"
         if (folder === "series") dest = "series"
         if (folder === "pfp") dest = "pfp"
-        if (!folder || filename.includes("history/")) return `${this.api.baseURL}/${filename}`
+        if (!folder || filename.includes("history/")) return `${this.api.baseURL}/${encodeURIComponent(filename)}`
         return `${this.api.baseURL}/${dest}/${filename}`
     }
 
@@ -100,6 +100,6 @@ export class Links {
         if (folder === "character") dest = "character"
         if (folder === "series") dest = "series"
         if (folder === "pfp") dest = "pfp"
-        return `${this.api.baseURL}/unverified/${dest}/${filename}`
+        return `${this.api.baseURL}/unverified/${dest}/${encodeURIComponent(filename)}`
     }
 }
