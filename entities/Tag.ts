@@ -149,4 +149,9 @@ export class TagRoutes {
         const response = await this.api.put("/api/tag/update", {tag, column, value})
         return response as string
     }
+
+    public insert = async (tag: string, type: string, description?: string) => {
+        const response = await this.api.put("/api/tag/insert", {tag, type, description})
+        return response as string
+    }
 }
