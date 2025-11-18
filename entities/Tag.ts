@@ -5,7 +5,7 @@ TagEditRequest, TagHistory, TagHistoryParams,
 AliasHistorySearch, AliasToParams, TagUpdateColumns,
 TagDeleteRequestFulfillParams, AliasToRequestParams,
 AliasToRequestFulfillParams, TagEditRequestFulfillParams,
-TagEditParams, AliasHistoryType} from "../types/Types"
+TagEditParams, AliasHistoryType, TagType} from "../types/Types"
 
 export class TagRoutes {
     public constructor(private readonly api: API) {}
@@ -150,7 +150,7 @@ export class TagRoutes {
         return response as string
     }
 
-    public insert = async (tag: string, type: string, description?: string) => {
+    public insert = async (tag: string, type: TagType, description?: string) => {
         const response = await this.api.put("/api/tag/insert", {tag, type, description})
         return response as string
     }
