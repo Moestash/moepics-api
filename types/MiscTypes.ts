@@ -123,6 +123,7 @@ export interface SourceLookup {
     danbooruLink: string
     sourceLinks: {link: string, hash: string}[]
     artistIcon: string
+    isAI: boolean
     source: {
         title: string
         englishTitle: string
@@ -218,6 +219,7 @@ export type MiscPostEndpoint<T extends string> =
     T extends "/api/misc/sourcelookup" ? {params: SourceLookupParams, response: SourceLookup} :
     T extends "/api/misc/taglookup" ? {params: TagLookupParams, response: TagLookup} :
     T extends "/api/misc/danboorutags" ? {params: {tags: string}, response: {tags: string}} :
+    T extends "/api/misc/moepicstags" ? {params: {tags: string}, response: {tags: string}} :
     T extends "/storage" ? {params: {link: string, songCover?: boolean}, response: string} :
     never
 

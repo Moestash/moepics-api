@@ -53,6 +53,8 @@ export interface GroupParams {
     name: string
     username?: string
     date?: string
+    remap?: boolean
+    silent?: boolean
 }
 
 export interface GroupEditParams {
@@ -71,6 +73,12 @@ export interface GroupReorderParams {
     silent?: boolean
 }
 
+export interface GroupRemapParams {
+    slug: string
+    postIDs: string[]
+    silent?: boolean
+}
+
 export interface GroupPostDeleteParams {
     postID: string
     name: string
@@ -79,7 +87,7 @@ export interface GroupPostDeleteParams {
 }
 
 export interface GroupRequestParams {
-    postID: string
+    postIDs: string[]
     name: string
     reason: string | null
 }
@@ -87,7 +95,7 @@ export interface GroupRequestParams {
 export interface GroupRequestFulfillParams {
     username: string
     slug: string
-    postID: string
+    requestID: string
     accepted: boolean
 }
 
@@ -121,6 +129,12 @@ export interface GroupEditRequestParams {
     reason: string | null
 }
 
+export interface GroupRemapRequestParams {
+    slug: string
+    postIDs: string[]
+    reason: string | null
+}
+
 export interface GroupEditRequestFulfillParams {
     username: string
     slug: string
@@ -138,7 +152,7 @@ export interface GroupHistoryParams {
 export type GroupGetEndpoint<T extends string> = 
     T extends "/api/group" ? {params: {name: string}, response: GroupPosts | undefined} :
     T extends "/api/groups" ? {params: {postID: string}, response: GroupPosts[]} :
-    T extends "/api/groups/list" ? {params: {groups: string[]}, response: Group[]} :
+    T extends "/api/groups/list" ? {params: {slugs: string[]}, response: GroupPosts[]} :
     T extends "/api/group/request/list" ? {params: {offset?: number} | null, response: GroupRequest[]} :
     T extends "/api/group/delete/request/list" ? {params: {offset?: number} | null, response: GroupDeleteRequest[]} :
     T extends "/api/group/edit/request/list" ? {params: {offset?: number} | null, response: GroupEditRequest[]} :
@@ -160,6 +174,7 @@ export type GroupPostEndpoint<T extends string> =
 export type GroupPutEndpoint<T extends string> = 
     T extends "/api/group/edit" ? {params: GroupEditParams, response: string} :
     T extends "/api/group/reorder" ? {params: GroupReorderParams, response: string} :
+    T extends "/api/group/remap" ? {params: GroupRemapParams, response: string} :
     T extends "/api/group/update" ? {params: {slug: string, column: GroupUpdateColumns, value: any}, response: string} :
     never
 

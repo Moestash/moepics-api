@@ -167,4 +167,14 @@ export class MiscRoutes {
         const response = await this.api.delete("/api/misc/api-key/delete", undefined)
         return response as string
     }
+
+    public danbooruTags = async (tags: string) => {
+        const response = await this.api.post("/api/misc/danboorutags", {tags})
+        return response as string[]
+    }
+
+    public moepicsTags = async (tags: string) => {
+        const response = await this.api.post("/api/misc/moepicstags", {tags})
+        return response as string[]
+    }
 }
