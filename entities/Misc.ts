@@ -168,12 +168,12 @@ export class MiscRoutes {
         return response as string
     }
 
-    public danbooruTags = async (tags: string) => {
+    public danbooruTags = async (tags: string[]) => {
         const response = await this.api.post("/api/misc/danboorutags", {tags})
         return response as string[]
     }
 
-    public moepicsTags = async (tags: string) => {
+    public moepicsTags = async (tags: string[]) => {
         const response = await this.api.post("/api/misc/moepicstags", {tags})
         return response as string[]
     }
