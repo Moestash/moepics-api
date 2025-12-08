@@ -160,6 +160,11 @@ export class PostRoutes {
         return response as string
     }
 
+    public regenerateThumbnails = async (postID: string) => {
+        const response = await this.api.post("/api/thumbnail/regenerate", {postID})
+        return response as string
+    }
+
     public delete = async (postID: string) => {
         const response = await this.api.delete("/api/post/delete", {postID})
         return response as string
