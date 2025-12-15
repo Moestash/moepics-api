@@ -1,8 +1,7 @@
 import {API} from "../api"
 import type {DeviationRSSExtended} from "deviantart.ts"
 import type {PixivResponse, Banner, SaucenaoResponse,
-ContactParams, CopyrightParams, WDTaggerResponse,
-OCRResponse, CoinbaseEvent, SourceLookupParams,
+WDTaggerResponse, OCRResponse, CoinbaseEvent, SourceLookupParams,
 SourceLookup, TagLookupParams, TagLookup} from "../types/Types"
 
 export class MiscRoutes {
@@ -76,16 +75,6 @@ export class MiscRoutes {
     public romajinize = async (params: string[]) => {
         const response = await this.api.post("/api/misc/romajinize", params)
         return response as string[]
-    }
-
-    public contact = async (params: ContactParams) => {
-        const response = await this.api.post("/api/misc/contact", params)
-        return response as string
-    }
-
-    public copyright = async (params: CopyrightParams) => {
-        const response = await this.api.post("/api/misc/copyright", params)
-        return response as string
     }
 
     public wdtagger = async (params: number[]) => {
