@@ -3,9 +3,10 @@ import type {PostFull, MiniTag, UserComment,
 ChildPost, UnverifiedPost, DeletedPost,
 PostDeleteRequest, PostHistory, PostHistoryParams,
 Redirect, PostDeleteRequestFulfillParams,
-PostCompressParams, PostUpscaleParams, ImageUpdateColumns,
+PostCompressParams, PostUpscaleParams,
 PostMetadata, PostQuickEditParams, PostUpdateColumns,
-PostQuickEditUnverifiedParams, ThumbnailUpdate} from "../types/Types"
+PostQuickEditUnverifiedParams, ThumbnailUpdate,
+MiniTagGroup} from "../types/Types"
 
 export class PostRoutes {
     public constructor(private readonly api: API) {}
@@ -190,13 +191,13 @@ export class PostRoutes {
         return response as string
     }
 
-    public addTags = async (postID: string, tags: string[]) => {
-        const response = await this.api.put("/api/post/addtags", {postID, tags})
+    public addTags = async (postID: string, tags?: string[], tagGroups?: MiniTagGroup[]) => {
+        const response = await this.api.put("/api/post/addtags", {postID, tags, tagGroups})
         return response as string
     }
 
-    public removeTags = async (postID: string, tags: string[]) => {
-        const response = await this.api.put("/api/post/removetags", {postID, tags})
+    public removeTags = async (postID: string, tags?: string[], tagGroups?: MiniTagGroup[]) => {
+        const response = await this.api.put("/api/post/removetags", {postID, tags, tagGroups})
         return response as string
     }
 }
