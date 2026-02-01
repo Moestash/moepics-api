@@ -4,7 +4,7 @@
   </p>
 </div>
 
-This is a private API wrapper around the [moepictures](https://moepictures.net/) api intended for personal use. 
+This is a personal API wrapper for the [moepictures](https://moepictures.net/) api intended for my own use. 
 You will need a valid api key in order to use this, which is not currently available to the public.
 
-©2025 Moepictures
+©2026 Moepictures
